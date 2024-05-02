@@ -10,9 +10,17 @@
 
 #grocery-list-section {
     width: 100%; 
-    text-align: center;    
+    text-align: center;
+    margin-top: 10px;  
 }
 
 #grocery-list-table {
     margin:0 auto;
+    width: 500px;
+    border-collapse: collapse;
+    
+}
+
+#grocery-list-table td {
+    border: 1px black solid;
 }
