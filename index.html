@@ -8,10 +8,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div style="width: 100%; text-align: center;"><img src="images/groceries.jpg"/></div>
-    <div style="width: 100%; text-align: center;">
-        <input type="text" name="product"/>
-        <input type="button" name="add" value="Add"/>
+    <div id="header-section"><img src="images/groceries.jpg"/></div>
+    <div id="input-section">
+        <form id="input-form">
+            <input type="text" name="product"/>
+            <input type="button" name="add" value="Add"/>
+        </form>
+    </div>
+    <div id="grocery-list-section">
+        <table id="grocery-list-table">
+            <th>
+                <td>Item</td>
+                <td>Quantity</td>
+                <td>Remove</td>
+            </th>
+        </table>
     </div>
 </body>
 </html>

@@ -1,0 +1,18 @@
+#header-section {
+    width: 100%; 
+    text-align: center;
+}
+
+#input-section {
+    width: 100%; 
+    text-align: center;
+}
+
+#grocery-list-section {
+    width: 100%; 
+    text-align: center;    
+}
+
+#grocery-list-table {
+    margin:0 auto;
+}
