@@ -3,6 +3,12 @@ const addButton = inputForm.elements['add'];
 const productInput = inputForm.elements['product'];
 const groceryTable = document.querySelector('#grocery-list-table');
 
+productInput.addEventListener("keypress", function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    addButton.click();
+  }
+});
 
 addButton.addEventListener("click", function() {
     const emptyTableRow = document.getElementById("empty-table-row");
@@ -33,7 +39,14 @@ addButton.addEventListener("click", function() {
     // Insert data to cells
     c1.innerText = productName;
     c2.innerText = 1;
-    c3.innerText = "";
+    const removeImage = document.createElement('img');
+    removeImage.src = 'images/remove.svg';
+    removeImage.addEventListener("click", function(event) {
+      const target = event.target;
+      const currentRow = target.parentElement.parentElement;
+      currentRow.parentElement.removeChild(currentRow);
+    });
+    c3.appendChild(removeImage);
 
     // Append cells to row
     row.appendChild(c1);
