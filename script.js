@@ -42,8 +42,10 @@ addButton.addEventListener("click", function (e) {
         = parseInt(currentRow.cells[1].innerText) + 1;
 
         e.preventDefault();
+        // Modify value attribute of input element in response to user interaction
+        // (when the users clicks add button, product input field is cleared out)
         productInput.value = "";
-      
+        
         return;
     }
   }
@@ -77,6 +79,8 @@ addButton.addEventListener("click", function (e) {
   groceryTable.appendChild(row);
 
   e.preventDefault();
+  // Modify value attribute of input element in response to user interaction
+  // (when the users clicks add button, product input field is cleared out)
   productInput.value = "";
 });
 
