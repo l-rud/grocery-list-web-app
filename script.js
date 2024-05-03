@@ -10,21 +10,41 @@ productInput.addEventListener("keypress", function (event) {
   }
 });
 
-addButton.addEventListener("click", function () {
+//event-based validation alert message
+function alert(message) {
+  const errorEl = document.getElementById("errorDisplay");
+  errorEl.style.display = "block";
+  errorEl.textContent = message;
+
+  setTimeout(() => {
+    errorEl.style.display = "none";
+  }, 3000);
+}
+
+addButton.addEventListener("click", function (e) {
+  const productName = productInput.value.trim();
+  if (productName === "") {
+    // event-based validation: do not allow product names containing whitespaces only
+    alert("Product name should not be blank");
+    return;
+  }
+
   const emptyTableRow = document.getElementById("empty-table-row");
   if (emptyTableRow !== null) {
     const parentTable = emptyTableRow.parentNode;
     parentTable.removeChild(emptyTableRow);
   }
 
-  const productName = productInput.value;
-
   for (let i = 1; i < groceryTable.rows.length; i++) {
     const currentRow = groceryTable.rows[i];
     if (currentRow.cells[0].innerText === productName) {
       currentRow.cells[1].innerText
         = parseInt(currentRow.cells[1].innerText) + 1;
-      return;
+
+        e.preventDefault();
+        productInput.value = "";
+      
+        return;
     }
   }
 
@@ -54,7 +74,10 @@ addButton.addEventListener("click", function () {
   row.appendChild(c3);
 
   // Append row to table body
-  groceryTable.appendChild(row)
+  groceryTable.appendChild(row);
+
+  e.preventDefault();
+  productInput.value = "";
 });
 
   //Using the cloneNode method to create an additional <td> element (remove column) in the grocery table 
@@ -62,3 +85,4 @@ addButton.addEventListener("click", function () {
   const additionalTdClone = tableDataTemplate.content.cloneNode(true);
   const tableRow = document.querySelector('tr');
   tableRow.appendChild(additionalTdClone);
+
