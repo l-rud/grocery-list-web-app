@@ -45,7 +45,7 @@ addButton.addEventListener("click", function (e) {
         // Modify value attribute of input element in response to user interaction
         // (when the users clicks add button, product input field is cleared out)
         productInput.value = "";
-        
+
         return;
     }
   }
@@ -89,4 +89,22 @@ addButton.addEventListener("click", function (e) {
   const additionalTdClone = tableDataTemplate.content.cloneNode(true);
   const tableRow = document.querySelector('tr');
   tableRow.appendChild(additionalTdClone);
+
+  function printGroceryList() {
+    let printWindow = window.open('', 'new div', 'height=400,width=600');
+    printWindow.document.write('<html><head><title></title>');
+    printWindow.document.write('<link rel="stylesheet" href="style.css" type="text/css" />');
+    printWindow.document.write('</head><body >');
+    printWindow.document.write(document.getElementById('grocery-list-section').innerHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.focus();
+
+    return true;
+}
+
+const printButton = document.getElementById('printButton');
+printButton.addEventListener("click", function (e) {
+  printGroceryList();
+});
 
