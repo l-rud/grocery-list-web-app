@@ -35,18 +35,19 @@ addButton.addEventListener("click", function (e) {
     parentTable.removeChild(emptyTableRow);
   }
 
+   //Iterate over a collection of elements (incrementing quantity for products in the product table)
   for (let i = 1; i < groceryTable.rows.length; i++) {
     const currentRow = groceryTable.rows[i];
     if (currentRow.cells[0].innerText === productName) {
       currentRow.cells[1].innerText
         = parseInt(currentRow.cells[1].innerText) + 1;
 
-        e.preventDefault();
-        // Modify value attribute of input element in response to user interaction
-        // (when the users clicks add button, product input field is cleared out)
-        productInput.value = "";
+      e.preventDefault();
+      // Modify value attribute of input element in response to user interaction
+      // (when the users clicks add button, product input field is cleared out)
+      productInput.value = "";
 
-        return;
+      return;
     }
   }
 
@@ -84,23 +85,41 @@ addButton.addEventListener("click", function (e) {
   productInput.value = "";
 });
 
-  //Using the cloneNode method to create an additional <td> element (remove column) in the grocery table 
-  const additionalTdTemplate = document.getElementById('tableDataTemplate');
-  const additionalTdClone = tableDataTemplate.content.cloneNode(true);
-  const tableRow = document.querySelector('tr');
-  tableRow.appendChild(additionalTdClone);
+//Using the cloneNode method to create an additional <td> element (remove column) in the grocery table 
+const additionalTdTemplate = document.getElementById('tableDataTemplate');
+const additionalTdClone = tableDataTemplate.content.cloneNode(true);
+const tableRow = document.querySelector('tr');
+tableRow.appendChild(additionalTdClone);
 
-  function printGroceryList() {
-    let printWindow = window.open('', 'new div', 'height=400,width=600');
-    printWindow.document.write('<html><head><title></title>');
-    printWindow.document.write('<link rel="stylesheet" href="style.css" type="text/css" />');
-    printWindow.document.write('</head><body >');
-    printWindow.document.write(document.getElementById('grocery-list-section').innerHTML);
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    printWindow.focus();
+//https://stackoverflow.com/questions/21379605/printing-div-content-with-css-applied
+function printGroceryList() {
+  let printWindow = window.open('', 'new div', 'height=400,width=600');
+  printWindow.document.write('<html><head><title></title>');
+  printWindow.document.write('<link rel="stylesheet" href="style.css" type="text/css" />');
+  printWindow.document.write('</head><body >');
+  printWindow.document.write(document.getElementById('grocery-list-section').innerHTML);
+  printWindow.document.write('</body></html>');
 
-    return true;
+  const printGroceryTable = printWindow.document.getElementById('grocery-list-table');
+  for (let i = 0; i < printGroceryTable.rows.length; i++) {
+    const currentRow = printGroceryTable.rows[i];
+    if (currentRow.cells.length === 3) {
+      // Modify the style of an element in response to user interactions using the style properties
+      // Hide third column ('Remove') in print window
+      currentRow.cells[2].style = "display: none;";
+    }
+
+    if (currentRow.cells.length === 1) {
+      // Modify the style of an element in response to user interactions using the style properties
+      // Hide last row (if displayed) in print window
+      currentRow.style = "display: none;";
+    }
+  }
+
+  printWindow.document.close();
+  printWindow.focus();
+
+  return true;
 }
 
 const printButton = document.getElementById('printButton');
